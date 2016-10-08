@@ -22,4 +22,7 @@ enter your Dockerhub email/password.
 
 Replace my repos with your repos.
 
-Hit http://<ip>:<port>/description/update?github_repo=phendryx/docker-github-dockerhub-sync&dockerhub_repo=phendryx/github-dockerhub-sync
+Hit 
+```
+http://<ip>:<port>/description/update?github_repo=phendryx/docker-github-dockerhub-sync&dockerhub_repo=phendryx/github-dockerhub-sync
+```

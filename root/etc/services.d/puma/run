@@ -1,0 +1,5 @@
+#!/usr/bin/with-contenv bash
+cd /opt/github-dockerhub-sync
+alias phantomjs='/usr/bin/xvfb-run /usr/bin/phantomjs'
+exec puma config.ru
+

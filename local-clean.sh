@@ -1,1 +1,0 @@
-docker rmi github-dockerhub-sync

@@ -1,8 +1,0 @@
-libxml2 \
-libffi \
-nginx \
-nodejs \
-nodejs-legacy \
-ruby \
-zlib1g \
-zlibc && \

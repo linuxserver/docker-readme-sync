@@ -1,6 +1,9 @@
 FROM lsiobase/xenial
 MAINTAINER phendryx
 
+# package version
+ARG PHANTOM_VER="2.1.13"
+
 # environment settings
 ARG DEBIAN_FRONTEND="noninteractive"
 
@@ -12,7 +15,6 @@ ARG BUILD_PACKAGES="\
 	libxml2-dev \
 	libxslt1-dev \
 	make \
-	npm \
 	ruby-dev \
 	ruby-full \
 	zlib1g-dev"
@@ -21,11 +23,12 @@ ARG BUILD_PACKAGES="\
 RUN \
  apt-get update && \
  apt-get -y install \
+	bzip2 \
+	curl \
+	fontconfig \
 	libffi-dev \
 	libxml2 \
 	nginx \
-	nodejs \
-	nodejs-legacy \
 	ruby \
 	zlib1g \
 	zlibc && \
@@ -34,10 +37,16 @@ RUN \
  apt-get install -y \
 	$BUILD_PACKAGES && \
 
-# dirty hack below, installing phantomjs via npm. The phantomjs build for ubuntu 16.04,
-# as of 2016-10-08, does not work headless, which defeats the purpose of phantomjs.
- npm -g install \
-	phantomjs-prebuilt && \
+# install phantomjs
+ mkdir -p \
+	/tmp/phantom-src && \
+ curl -o \
+ /tmp/phantom.tar.gz -L \
+	"https://github.com/Medium/phantomjs/archive/${PHANTOM_VER}.tar.gz" && \
+ tar xf \
+ /tmp/phantom.tar.gz -C \
+	/tmp/phantom-src --strip-components=1 && \
+ cp /tmp/phantom-src/bin/* /usr/bin/ && \
 
 # install github-dockerhub-sync
  git clone https://github.com/phendryx/github-dockerhub-sync.git \

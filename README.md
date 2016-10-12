@@ -14,6 +14,10 @@ If you want to comment\contribute on this container , are looking for support on
 * [IRC][ircurl] on freenode at `#linuxserver.io`
 * [Podcast][podcasturl] covers everything to do with getting the most from your Linux Server plus a focus on all things Docker and containerisation!
 
+# lsiodev/readme-sync
+
+Utility to copy README.md from a given github.com repository to a given dockerhub.com repository. 
+
 ## Usage
 
 ```

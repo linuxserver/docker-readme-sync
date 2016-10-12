@@ -1,0 +1,4 @@
+#!/usr/bin/with-contenv bash
+cd /opt/github-dockerhub-sync
+exec puma config.ru
+

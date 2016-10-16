@@ -64,7 +64,13 @@ In the examples below, `github_repo` and `dockerhub_repo` should look similar `l
 
 ### Command Line
 
-`docker exec -it readme-sync bash -c "rake update[<github_repo>,<dockerhub_repo>]"`
+In the example below, the application would take the README.me found at the 
+`my_github/my_repo` repo and save it on the 
+`my_dockerhub/my_repo` dockerhub repo's full description field. 
+
+NOTE: The `[` and `]` are important and must be in the command line.
+
+`docker exec -it readme-sync bash -c "rake update[my_github/my_repo,my_dockerhub/my_repo]"`
 
 ## Info
 

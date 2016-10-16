@@ -21,8 +21,11 @@ class SyncService
       end
     end
 
-    dh.update_full_desc(dockerhub_repo, gh_content)
+    if dh.update_full_desc(dockerhub_repo, gh_content)
+      puts "Dockerhub update successful."
+    else
+      puts "Dockerhub update failed."
+    end
 
-    puts "Dockerhub update successful."
   end
 end

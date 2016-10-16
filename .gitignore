@@ -44,3 +44,7 @@ Temporary Items
 
 tmp/
 local*.sh
+
+config/settings.yml
+tmp/
+.idea/

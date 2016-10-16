@@ -17,6 +17,8 @@ ARG BUILD_PACKAGES="\
     ruby-full \
     zlib1g-dev"
 
+COPY app/ /opt/docker-readme-sync/
+
 # install runtime packages
 RUN \
  apt-get update && \
@@ -39,10 +41,8 @@ RUN \
  npm -g install \
     phantomjs-prebuilt && \
 
-# install github-dockerhub-sync
- git clone https://github.com/phendryx/github-dockerhub-sync.git \
-    /opt/github-dockerhub-sync/ && \
- cd /opt/github-dockerhub-sync && \
+# install ruby app gems
+ cd /opt/docker-readme-sync/ && \
  echo 'gem: --no-document' > \
     /etc/gemrc && \
  gem install bundler && \

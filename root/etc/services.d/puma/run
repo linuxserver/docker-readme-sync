@@ -1,4 +1,4 @@
 #!/usr/bin/with-contenv bash
-cd /opt/github-dockerhub-sync
+cd /opt/docker-readme-sync
 exec puma config.ru
 

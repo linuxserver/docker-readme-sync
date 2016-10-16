@@ -22,7 +22,7 @@ module GithubDockerhubSync
 
       if output.include?("Login Failed")
         halt 404, 'Dockerhub login failed.'
-      elsif output.empty? || output.include?("Dockerhub update successful.")
+      elsif output.include?("Dockerhub update successful.")
         body "OK"
       else
         halt 500, "Dockerhub update failed. Command output:\n\n#{output}"

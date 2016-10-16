@@ -1,4 +1,3 @@
-
 [linuxserverurl]: https://linuxserver.io
 [forumurl]: https://forum.linuxserver.io
 [ircurl]: https://www.linuxserver.io/irc/
@@ -22,7 +21,7 @@ Utility to copy README.md from a given github.com repository to a given dockerhu
 
 ```
 docker create \
---name=docker-readme-sync \
+--name=readme-sync \
 -e PUID=<UID> \
 -e PGID=<GID> \
 -p 80:80 \
@@ -37,7 +36,7 @@ lsiodev/readme-sync
 * `-e PGID` for GroupID - see below for explanation
 * `-e PUID` for UserID - see below for explanation
 
-It is based on ubuntu xenial with s6 overlay, for shell access whilst the container is running do `docker exec -it docker-readme-sync /bin/bash`.
+It is based on ubuntu xenial with s6 overlay, for shell access whilst the container is running do `docker exec -it readme-sync /bin/bash`.
 
 ### User / Group Identifiers
 
@@ -66,27 +65,27 @@ In the examples below, `github_repo` and `dockerhub_repo` should look similar `l
 ### Command Line
 
 In the example below, the application would take the README.me found at the 
-`linuxserver/docker-readme-sync` repo and save it on the 
-`linuxserver/docker-readme-sync` dockerhub repo's full description field. 
+`my_github/my_repo` repo and save it on the 
+`my_dockerhub/my_repo` dockerhub repo's full description field. 
 
 NOTE: The `[` and `]` are important and must be in the command line.
 
-`docker exec -it docker-readme-sync bash -c "rake update[linuxserver/docker-readme-sync,linuxserver/docker-readme-sync]"`
+`docker exec -it readme-sync bash -c "rake update[my_github/my_repo,my_dockerhub/my_repo]"`
 
 ## Info
 
-* Shell access whilst the container is running: `docker exec -it docker-readme-sync /bin/bash`
-* To monitor the logs of the container in realtime: `docker logs -f docker-readme-sync`
+* Shell access whilst the container is running: `docker exec -it readme-sync /bin/bash`
+* To monitor the logs of the container in realtime: `docker logs -f readme-sync`
 
 * container version number 
 
-`docker inspect -f '{{ index .Config.Labels "build_version" }}' docker-readme-sync`
+`docker inspect -f '{{ index .Config.Labels "build_version" }}' readme-sync`
 
 * image version number
 
-`docker inspect -f '{{ index .Config.Labels "build_version" }}' linuxserver/docker-readme-sync`
+`docker inspect -f '{{ index .Config.Labels "build_version" }}' linuxserver/readme-sync`
 
 ## Versions
+
 + **16.10.16:** merge ruby app.
 + **11.10.16:** Initial development release.
-

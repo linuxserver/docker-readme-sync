@@ -1,6 +1,11 @@
 FROM lsiobase/xenial
 MAINTAINER phendryx
 
+# set version label
+ARG BUILD_DATE
+ARG VERSION
+LABEL build_version="Linuxserver.io version:- ${VERSION} Build-date:- ${BUILD_DATE}"
+
 # environment settings
 ARG DEBIAN_FRONTEND="noninteractive"
 
@@ -17,6 +22,7 @@ ARG BUILD_PACKAGES="\
     ruby-full \
     zlib1g-dev"
 
+# copy app
 COPY app/ /opt/docker-readme-sync/
 
 # install runtime packages
@@ -62,5 +68,6 @@ RUN \
 COPY root/ /
 
 # ports and volumes
+WORKDIR /opt/docker-readme-sync
 EXPOSE 80 443
 VOLUME /config

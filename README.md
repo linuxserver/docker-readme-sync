@@ -81,4 +81,6 @@ In the examples below, `github_repo` and `dockerhub_repo` should look similar `l
 `docker inspect -f '{{ index .Config.Labels "build_version" }}' linuxserver/mariadb`
 
 ## Versions
++ **16.10.16:** Merge ruby app to docker repo.
 + **11.10.16:** Initial development release.
+

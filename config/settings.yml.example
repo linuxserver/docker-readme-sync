@@ -1,0 +1,3 @@
+dockerhub:
+  email: my@email.com
+  password: mypassword

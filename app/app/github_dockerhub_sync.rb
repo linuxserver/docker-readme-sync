@@ -17,7 +17,7 @@ module GithubDockerhubSync
 
       # This version is for the nodejs install of phantomjs, which seems to keep
       # phantomjs alive?
-      cmd = "rake update[#{github_repo},#{dockerhub_repo}]  2>&1"
+      cmd = "rake phantomjs_shell[#{github_repo},#{dockerhub_repo}]  2>&1"
       output = `#{cmd}`
 
       if output.include?("Login Failed")

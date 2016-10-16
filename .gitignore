@@ -45,6 +45,7 @@ Temporary Items
 tmp/
 local*.sh
 
-config/settings.yml
+app/config/settings.yml
 tmp/
 .idea/
+app/tmp

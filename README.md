@@ -65,20 +65,26 @@ In the examples below, `github_repo` and `dockerhub_repo` should look similar `l
 
 ### Command Line
 
-`docker exec -it docker-readme-sync bash -c "cd /opt/github-dockerhub-sync/ && rake update[<github_repo>,<dockerhub_repo>]"`
+In the example below, the application would take the README.me found at the 
+`linuxserver/docker-readme-sync` repo and save it on the 
+`linuxserver/docker-readme-sync` dockerhub repo's full description field. 
+
+NOTE: The `[` and `]` are important and must be in the command line.
+
+`docker exec -it docker-readme-sync bash -c "rake update[linuxserver/docker-readme-sync,linuxserver/docker-readme-sync]"`
 
 ## Info
 
-* Shell access whilst the container is running: `docker exec -it mariadb /bin/bash`
-* To monitor the logs of the container in realtime: `docker logs -f mariadb`
+* Shell access whilst the container is running: `docker exec -it docker-readme-sync /bin/bash`
+* To monitor the logs of the container in realtime: `docker logs -f docker-readme-sync`
 
 * container version number 
 
-`docker inspect -f '{{ index .Config.Labels "build_version" }}' mariadb`
+`docker inspect -f '{{ index .Config.Labels "build_version" }}' docker-readme-sync`
 
 * image version number
 
-`docker inspect -f '{{ index .Config.Labels "build_version" }}' linuxserver/mariadb`
+`docker inspect -f '{{ index .Config.Labels "build_version" }}' linuxserver/docker-readme-sync`
 
 ## Versions
 + **16.10.16:** merge ruby app.

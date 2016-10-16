@@ -1,4 +1,3 @@
-
 [linuxserverurl]: https://linuxserver.io
 [forumurl]: https://forum.linuxserver.io
 [ircurl]: https://www.linuxserver.io/irc/
@@ -22,7 +21,7 @@ Utility to copy README.md from a given github.com repository to a given dockerhu
 
 ```
 docker create \
---name=docker-readme-sync \
+--name=readme-sync \
 -e PUID=<UID> \
 -e PGID=<GID> \
 -p 80:80 \
@@ -37,7 +36,7 @@ lsiodev/readme-sync
 * `-e PGID` for GroupID - see below for explanation
 * `-e PUID` for UserID - see below for explanation
 
-It is based on ubuntu xenial with s6 overlay, for shell access whilst the container is running do `docker exec -it docker-readme-sync /bin/bash`.
+It is based on ubuntu xenial with s6 overlay, for shell access whilst the container is running do `docker exec -it readme-sync /bin/bash`.
 
 ### User / Group Identifiers
 
@@ -65,22 +64,22 @@ In the examples below, `github_repo` and `dockerhub_repo` should look similar `l
 
 ### Command Line
 
-`docker exec -it docker-readme-sync bash -c "cd /opt/github-dockerhub-sync/ && rake update[<github_repo>,<dockerhub_repo>]"`
+`docker exec -it readme-sync bash -c "rake update[<github_repo>,<dockerhub_repo>]"`
 
 ## Info
 
-* Shell access whilst the container is running: `docker exec -it mariadb /bin/bash`
-* To monitor the logs of the container in realtime: `docker logs -f mariadb`
+* Shell access whilst the container is running: `docker exec -it readme-sync /bin/bash`
+* To monitor the logs of the container in realtime: `docker logs -f readme-sync`
 
 * container version number 
 
-`docker inspect -f '{{ index .Config.Labels "build_version" }}' mariadb`
+`docker inspect -f '{{ index .Config.Labels "build_version" }}' readme-sync`
 
 * image version number
 
-`docker inspect -f '{{ index .Config.Labels "build_version" }}' linuxserver/mariadb`
+`docker inspect -f '{{ index .Config.Labels "build_version" }}' linuxserver/readme-sync`
 
 ## Versions
+
 + **16.10.16:** merge ruby app.
 + **11.10.16:** Initial development release.
-

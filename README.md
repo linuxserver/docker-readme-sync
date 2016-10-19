@@ -87,7 +87,7 @@ NOTE: The `[` and `]` are important and must be in the command line.
 
 * image version number
 
-`docker inspect -f '{{ index .Config.Labels "build_version" }}' linuxserver/readme-sync`
+`docker inspect -f '{{ index .Config.Labels "build_version" }}' lsiodev/readme-sync`
 
 ## Versions
 

@@ -76,6 +76,10 @@ NOTE: The `[` and `]` are important and must be in the command line.
 
 `docker exec -it readme-sync bash -c "rake update[my_github/my_repo,my_dockerhub/my_repo]"`
 
+### Command Line with ENV variables
+
+`docker exec -it readme-sync bash -c "rake update" USE_ENV_CREDENTIALS=true  DOCKERHUB_USERNAME=<username> DOCKERHUB_PASSWORD=<password> GIT_REPOSITORY=<GIT_REPOSITORY> DOCKER_REPOSITORY=<DOCKER_REPOSITORY>`
+
 ## Info
 
 * Shell access whilst the container is running: `docker exec -it readme-sync /bin/bash`

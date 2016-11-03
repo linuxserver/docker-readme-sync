@@ -3,11 +3,22 @@ require 'yaml'
 class SyncService
 
   def self.update(github_repo, dockerhub_repo)
-    config_file = File.expand_path("../../../config", __FILE__) + "/settings.yml"
-    settings = YAML.load_file(config_file)
+    if ENV['USE_ENV_CREDENTIALS'] == "true"
+      if ENV['DOCKERHUB_USERNAME'].nil? || ENV['DOCKERHUB_USERNAME'].empty? ||
+        ENV['DOCKERHUB_PASSWORD'].nil? || ENV['DOCKERHUB_PASSWORD'].empty?
+        raise "USE_ENV_CREDENTIALS is set to true, but DOCKERHUB_USERNAME or DOCKERHUB_PASSWORD was not specified."
+      end
 
-    username = settings["dockerhub"]["email"]
-    password = settings["dockerhub"]["password"]
+      username = ENV['DOCKERHUB_USERNAME']
+      password = ENV['DOCKERHUB_PASSWORD']
+    else
+      config_file = File.expand_path("../../../config", __FILE__) + "/settings.yml"
+      settings = YAML.load_file(config_file)
+
+      username = settings["dockerhub"]["email"]
+      password = settings["dockerhub"]["password"]
+    end
+
 
     gh = Github.new
     dh = Dockerhub.new(username, password)

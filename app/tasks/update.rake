@@ -2,9 +2,13 @@ require "./app"
 
 desc "Updata a Dockerhub repo's full descrption"
 task :update, [:github_repo, :dockerhub_repo] do |t, args|
+  unless ENV["GIT_REPOSITORY"].nil? || ENV["GIT_REPOSITORY"].empty?
+    github_repo = ENV["GIT_REPOSITORY"]
+  end
 
-  github_repo = args[:github_repo]
-  dockerhub_repo = args[:dockerhub_repo]
+  unless ENV["DOCKER_REPOSITORY"].nil? || ENV["DOCKER_REPOSITORY"].empty?
+    dockerhub_repo = ENV["DOCKER_REPOSITORY"]
+  end
 
   gh = Github.new
   unless gh.repo_exists?(github_repo)
@@ -27,7 +31,7 @@ task :update, [:github_repo, :dockerhub_repo] do |t, args|
   # phantomjs alive?
   cmd = "rake phantomjs_shell[#{github_repo},#{dockerhub_repo}]  2>&1"
   output = `#{cmd}`
-
+  
   if output.include?("Login Failed")
     puts "Dockerhub login failed."
     exit 1

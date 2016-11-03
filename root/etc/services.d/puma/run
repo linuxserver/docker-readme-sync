@@ -1,4 +1,4 @@
 #!/usr/bin/with-contenv bash
-cd /opt/docker-readme-sync
+cd /opt/docker-readme-sync || exit
 exec puma config.ru
 

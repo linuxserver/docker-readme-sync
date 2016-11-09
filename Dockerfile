@@ -127,7 +127,8 @@ RUN \
 # dirty hack below, installing phantomjs via npm. The phantomjs build for ubuntu 16.04,
 # as of 2016-10-08, does not work headless, which defeats the purpose of phantomjs.
  npm -g install \
-	phantomjs-prebuilt && \
+	phantomjs-bin && \
+ install -Dm755 /usr/lib/node_modules/phantomjs-bin/bin/linux/x64/phantomjs /usr/bin/phantomjs && \
 
 # install ruby app gems
  cd /opt/docker-readme-sync/ && \
@@ -138,20 +139,25 @@ RUN \
 
 # clean up
  apt-get purge -y --auto-remove \
-	$BUILD_PACKAGES && \
+	$BUILD_PACKAGES \
+	nodejs \
+	rlwrap && \
 
 # install runtime packages
  apt-get install -y \
 	--no-install-recommends \
+	fontconfig \
 	libxml2 \
 	nginx-light \
 	ruby && \
 
  rm -rf \
 	/tmp/* \
+	/usr/lib/node_modules \
 	/var/lib/apt/lists/* \
 	/var/tmp/* && \
  find /root -name . -o -prune -exec rm -rf -- {} + && \
+ find /var/lib/gems -name "cache" -type d -exec rm -rf -- {} + && \
  mkdir -p \
 	/root
 

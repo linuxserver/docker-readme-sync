@@ -1,4 +1,4 @@
 #!/usr/bin/with-contenv bash
 cd /opt/docker-readme-sync || exit
-exec puma config.ru
+exec puma -b unix:///var/run/puma.sock config.ru
 

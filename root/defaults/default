@@ -1,5 +1,5 @@
 upstream sinatra {
-  server app:9292 fail_timeout=0;
+  server unix:///var/run/puma.sock;
 }
 
 server {

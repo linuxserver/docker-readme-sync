@@ -86,11 +86,11 @@ class Dockerhub
 
       # Login
       puts "Entering credentials..."
-      find(:xpath, "//input[contains(@placeholder,'Username')]").set(@username)
-      find(:xpath, "//input[contains(@placeholder,'Password')]").set(@password)
+      find(:xpath, "//*[@id='nw_username']").set(@username)
+      find(:xpath, "//*[@id='nw_password']").set(@password)
 
       puts "Clicking login..."
-      find(:xpath, "//button[text()=\"Log In\"]").click
+      find(:xpath, "//*[@id='nw_submit']").click
 
       # Wait for login to finish
       begin

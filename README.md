@@ -12,7 +12,7 @@ The [LinuxServer.io][linuxserverurl] team brings you another container release f
 * [Podcast][podcasturl] covers everything to do with getting the most from your Linux Server plus a focus on all things Docker and containerisation!
 
 # lsiodev/readme-sync
-[![](https://images.microbadger.com/badges/version/lsiodev/readme-sync.svg)](https://microbadger.com/images/lsiodev/readme-sync "Get your own version badge on microbadger.com")[![](https://images.microbadger.com/badges/image/lsiodev/readme-sync.svg)](https://microbadger.com/images/lsiodev/readme-sync "Get your own image badge on microbadger.com")[![Docker Pulls](https://img.shields.io/docker/pulls/lsiodev/readme-sync.svg)][hub][![Docker Stars](https://img.shields.io/docker/stars/lsiodev/readme-sync.svg)][hub][![Build Status](https://ci.linuxserver.io/buildStatus/icon?job=Tools/readme-sync-docker)](https://ci.linuxserver.io/job/Tools/job/readme-sync-docker/)
+[![](https://images.microbadger.com/badges/version/lsiodev/readme-sync.svg)](https://microbadger.com/images/lsiodev/readme-sync "Get your own version badge on microbadger.com")[![](https://images.microbadger.com/badges/image/lsiodev/readme-sync.svg)](https://microbadger.com/images/lsiodev/readme-sync "Get your own image badge on microbadger.com")[![Docker Pulls](https://img.shields.io/docker/pulls/lsiodev/readme-sync.svg)][hub][![Docker Stars](https://img.shields.io/docker/stars/lsiodev/readme-sync.svg)][hub][![Build Status](https://ci.linuxserver.io/buildStatus/icon?job=Docker-Builders/lsiodev/readme-sync-docker)](https://ci.linuxserver.io/job/Docker-Builders/job/lsiodev/job/readme-sync-docker/)
 
 Utility to copy README.md from a given github.com repository to a given dockerhub.com repository. 
 

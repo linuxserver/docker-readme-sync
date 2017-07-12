@@ -8,6 +8,7 @@ LABEL build_version="Linuxserver.io version:- ${VERSION} Build-date:- ${BUILD_DA
 
 # environment settings
 ARG DEBIAN_FRONTEND="noninteractive"
+ENV LANG="C.UTF-8"
 
 # build packages as variable
 ARG BUILD_PACKAGES="\

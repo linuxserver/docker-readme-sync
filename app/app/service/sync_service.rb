@@ -2,7 +2,7 @@ require 'yaml'
 
 class SyncService
 
-  def self.update(github_repo, dockerhub_repo)
+  def self.update(github_repo, dockerhub_repo, branch = 'master')
     if ENV['USE_ENV_CREDENTIALS'] == "true"
       if ENV['DOCKERHUB_USERNAME'].nil? || ENV['DOCKERHUB_USERNAME'].empty? ||
         ENV['DOCKERHUB_PASSWORD'].nil? || ENV['DOCKERHUB_PASSWORD'].empty?
@@ -19,16 +19,17 @@ class SyncService
       password = settings["dockerhub"]["password"]
     end
 
+    branch = 'master' if branch.nil? || branch.empty?
 
     gh = Github.new
     dh = Dockerhub.new(username, password)
 
     gh_content = nil
     begin
-      gh_content = gh.get_raw_readme(github_repo)
+      gh_content = gh.get_raw_readme(github_repo, branch)
     rescue Mechanize::ResponseCodeError => e
       if e.response_code == "404"
-        raise "Github Repo Not FOund"
+        raise "Github Repo Not Found"
       end
     end
 

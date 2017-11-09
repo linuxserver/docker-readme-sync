@@ -10,10 +10,10 @@ class Github
     page.search('.markdown-body').inner_html
   end
 
-  def readme_exists(repository)
+  def readme_exists(repository, branch = 'master')
     begin
       mech = Mechanize.new
-      mech.get("https://raw.githubusercontent.com/#{repository}/master/README.md")
+      mech.get("https://raw.githubusercontent.com/#{repository}/#{branch}/README.md")
       return true
     rescue Mechanize::ResponseCodeError => e
       return false if e.response_code == "404"
@@ -34,9 +34,9 @@ class Github
     return false
   end
 
-  def get_raw_readme(repository)
+  def get_raw_readme(repository, branch = 'master')
     mech = Mechanize.new
-    page = mech.get("https://raw.githubusercontent.com/#{repository}/master/README.md")
+    page = mech.get("https://raw.githubusercontent.com/#{repository}/#{branch}/README.md")
     page.body
   end
 

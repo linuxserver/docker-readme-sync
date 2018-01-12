@@ -1,10 +1,10 @@
 FROM lsiobase/xenial
-MAINTAINER phendryx
 
 # set version label
 ARG BUILD_DATE
 ARG VERSION
 LABEL build_version="Linuxserver.io version:- ${VERSION} Build-date:- ${BUILD_DATE}"
+LABEL maintainer="phendryx"
 
 # environment settings
 ARG DEBIAN_FRONTEND="noninteractive"
@@ -113,8 +113,8 @@ ARG BUILD_PACKAGES="\
 COPY app/ /opt/docker-readme-sync/
 COPY excludes /etc/dpkg/dpkg.cfg.d/excludes
 
-# install build packages
 RUN \
+ echo "**** install build packages ****" && \
  apt-get update && \
  apt-get install -y \
 	--no-install-recommends \
@@ -124,34 +124,29 @@ RUN \
  apt-get install -y \
 	--no-install-recommends \
 	nodejs && \
-
-# dirty hack below, installing phantomjs via npm. The phantomjs build for ubuntu 16.04,
-# as of 2016-10-08, does not work headless, which defeats the purpose of phantomjs.
+ echo "**** install phantomjs via npm ****" && \
  npm -g install \
 	phantomjs-bin && \
  install -Dm755 /usr/lib/node_modules/phantomjs-bin/bin/linux/x64/phantomjs /usr/bin/phantomjs && \
-
-# install ruby app gems
+ echo "**** install ruby app gems ****" && \
  cd /opt/docker-readme-sync/ && \
  echo 'gem: --no-document' > \
 	/etc/gemrc && \
  gem install bundler && \
  bundle install && \
-
-# clean up
+ echo "**** uninstall build packages ****" && \
  apt-get purge -y --auto-remove \
 	$BUILD_PACKAGES \
 	nodejs \
 	rlwrap && \
-
-# install runtime packages
+ echo "**** install runtime packages ****" && \
  apt-get install -y \
 	--no-install-recommends \
 	fontconfig \
 	libxml2 \
 	nginx-light \
 	ruby && \
-
+ echo "**** cleanup ****" && \
  rm -rf \
 	/tmp/* \
 	/usr/lib/node_modules \

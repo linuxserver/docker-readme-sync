@@ -25,7 +25,7 @@ docker run --rm=true \
     -e GIT_REPOSITORY=<GITHUB REPO> \
     -e DOCKER_REPOSITORY=<DOCKERHUB REPO> \
     -e GIT_BRANCH=<GITHUB BRANCH> \
-    lsiodev/readme-sync bash -c 'cd /opt/docker-readme-sync; node sync'
+    lsiodev/readme-sync bash -c 'node sync'
 ```
 
 ## Parameters

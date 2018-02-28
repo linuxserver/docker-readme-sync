@@ -19,13 +19,13 @@ Utility to copy README.md from a given github.com repository to a given dockerhu
 ## Usage
 
 ```
-docker create \
---name=readme-sync \
--e PUID=<UID> \
--e PGID=<GID> \
--p 80:80 \
--v </path/to/appdata>:/config \
-lsiodev/readme-sync
+docker run --rm=true \
+    -e DOCKERHUB_USERNAME=<USERNAME> \
+    -e DOCKERHUB_PASSWORD=<PASSWORD> \
+    -e GIT_REPOSITORY=<GITHUB REPO> \
+    -e DOCKER_REPOSITORY=<DOCKERHUB REPO> \
+    -e GIT_BRANCH=<GITHUB BRANCH> \
+    lsiodev/readme-sync bash -c 'node sync'
 ```
 
 ## Parameters
@@ -36,66 +36,17 @@ So -p 8080:80 would expose port 80 from inside the container to be accessible fr
 http://192.168.x.x:8080 would show you what's running INSIDE the container on port 80.`
 
 
-* `-p 80` - API Port
-* `-v /config` - Contains the db itself and all assorted settings. 
-* `-e PGID` for GroupID - see below for explanation
-* `-e PUID` for UserID - see below for explanation
+* `-e DOCKERHUB_USERNAME` - your dockerhub username
+* `-e DOCKERHUB_PASSWORD` - your dockerhub password
+* `-e GIT_REPOSITORY` - github repository, i.e. linuxserver/docker-readme-sync
+* `-e DOCKER_REPOSITORY` - dockerhub repository, i.e. lsiodev/docker-readme-sync
+* `-e GIT_BRANCH` - github repository branch, optional (default: master)
 
-It is based on ubuntu xenial with s6 overlay, for shell access whilst the container is running do `docker exec -it readme-sync /bin/bash`.
-
-### User / Group Identifiers
-
-Sometimes when using data volumes (`-v` flags) permissions issues can arise between the host OS and the container. We avoid this issue by allowing you to specify the user `PUID` and group `PGID`. Ensure the data volume directory on the host is owned by the same user you specify and it will "just work".
-
-In this instance `PUID=1001` and `PGID=1001`. To find yours use `id user` as below:
-
-```
-  $ id <dockeruser>
-    uid=1001(dockeruser) gid=1001(dockergroup) groups=1001(dockergroup)
-```
-
-## Setting up the application 
-
-Once the docker container is created, an example settings file will be copied to `</path/to/appdata>/github-dockerhub-sync/settings.yml`. This file should be modified to contain your Dockerhub email and password.
-
-
-## Using the application
-
-In the examples below, `github_repo` and `dockerhub_repo` should look similar `lsiodev/readme-sync.`
-
-### API - GET command
-
-`http://<ip_address>:<port>/description/update?github_repo=<github_repo>&dockerhub_repo=<dockerhub_repo>`
-
-### Command Line
-
-In the example below, the application would take the README.me found at the 
-`my_github/my_repo` repo and save it on the 
-`my_dockerhub/my_repo` dockerhub repo's full description field. 
-
-NOTE: The `[` and `]` are important and must be in the command line.
-
-`docker exec -it readme-sync bash -c "rake update[my_github/my_repo,my_dockerhub/my_repo]"`
-
-### Command Line with ENV variables
-
-`docker exec -it readme-sync bash -c "rake update" USE_ENV_CREDENTIALS=true  DOCKERHUB_USERNAME=<username> DOCKERHUB_PASSWORD=<password> GIT_REPOSITORY=<GIT_REPOSITORY> DOCKER_REPOSITORY=<DOCKER_REPOSITORY>`
-
-## Info
-
-* Shell access whilst the container is running: `docker exec -it readme-sync /bin/bash`
-* To monitor the logs of the container in realtime: `docker logs -f readme-sync`
-
-* container version number 
-
-`docker inspect -f '{{ index .Config.Labels "build_version" }}' readme-sync`
-
-* image version number
-
-`docker inspect -f '{{ index .Config.Labels "build_version" }}' lsiodev/readme-sync`
+It is based on alpine and is not meant to run as a service. The sync is performed and the command exits.
 
 ## Versions
 
++ **28.02.18:** convert repo to use node.js implementation.
 + **17.11.08:** add github branch support.
 + **16.10.16:** merge ruby app.
 + **11.10.16:** Initial development release.

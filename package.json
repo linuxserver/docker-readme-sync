@@ -1,0 +1,22 @@
+{
+  "name": "nodejs_github_dockerhub_readme_sync",
+  "version": "0.0.1",
+  "description": "Node.js utility to copy a github repo README.md to full description of a dockerhub repo.",
+  "main": "sync.js",
+  "dependencies": {
+    "docker-hub-api": "^0.5.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/linuxserver/docker-nodejs-readme-sync.git"
+  },
+  "author": "Paul Hendryx <phendryx@gmail.com>",
+  "bugs": {
+    "url": "https://github.com/linuxserver/docker-nodejs-readme-sync/issues"
+  },
+  "homepage": "https://github.com/linuxserver/docker-nodejs-readme-sync#readme"
+}

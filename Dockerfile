@@ -17,7 +17,7 @@ RUN \
  apk add --no-cache \
 	nodejs && \
  echo "**** install readme-sync node packages *****" && \
- cd /opt/readme-sync && \
+ cd /opt/docker-readme-sync && \
  npm install && \
  echo "**** cleanup ****" && \
  rm -rf \

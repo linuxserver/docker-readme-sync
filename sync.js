@@ -5,7 +5,7 @@ var https = require('https');
 var get_github_readme = function(repo, branch, callback) {
 	var repo_parts = repo.split('/');
 
-	var readme;
+	var readme = '';
 	var url = 'https://raw.githubusercontent.com/' + repo_parts[0] + '/' + repo_parts[1] + '/' + branch + '/README.md'
 	var request = https.get(url, function(response) {
 	    response.on('data', function(chunk) {

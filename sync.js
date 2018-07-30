@@ -28,7 +28,7 @@ var get_dockerhub_readme = function (repo, callback) {
 	});
 };
 
-var update_dockerhob_readme = function(user, pass, repo, full_desc, callback) {
+var update_dockerhub_readme = function(user, pass, repo, full_desc, callback) {
 	const dockerHubAPI = require('docker-hub-api');
 
 	var repo_parts = repo.split('/');
@@ -64,7 +64,7 @@ function run() {
 			// If they dont match, update it, else, just notify console it's doing nothing.
 			if (github_readme != dockerhub_readme) {
 				console.log('Github readme and dockerhub full description do not match, updating...');
-				update_dockerhob_readme(dockerhub_username, dockerhub_password, dockerhub_repo, github_readme, function() {
+				update_dockerhub_readme(dockerhub_username, dockerhub_password, dockerhub_repo, github_readme, function() {
 					console.log('Dockerhub updated.');					
 				});
 			} else {

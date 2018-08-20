@@ -75,6 +75,7 @@ It is based on alpine and is not meant to run as a service. The sync is performe
 
 |  Date | Changes |
 | :---: | --- |
+| 20.08.18 |  Rebase to alpine 3.8. |
 | 28.02.18 |  convert repo to use node.js implementation. |
 | 17.11.17 |  add github branch support. |
 | 16.10.16 |  merge ruby app. |

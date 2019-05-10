@@ -5,9 +5,9 @@ var https = require('https');
 var get_github_readme = function(repo, branch, callback) {
 	var repo_parts = repo.split('/');
 
-	var readme = '';
-	var url = 'https://raw.githubusercontent.com/' + repo_parts[0] + '/' + repo_parts[1] + '/' + branch + '/README.md';
-	https.get(url, function(response) {
+	var readme;
+	var url = 'https://raw.githubusercontent.com/' + repo_parts[0] + '/' + repo_parts[1] + '/' + branch + '/README.md'
+	var request = https.get(url, function(response) {
 	    response.on('data', function(chunk) {
 	        readme += chunk;
 	    });
@@ -23,7 +23,7 @@ var get_dockerhub_readme = function (repo, callback) {
 
 	var repo_parts = repo.split('/');
 
-	dockerHubAPI.repository(repo_parts[0], repo_parts[1]).then(function(info) {
+	var repo = dockerHubAPI.repository(repo_parts[0], repo_parts[1]).then(function(info) {
 		callback(info['full_description']);
 	});
 };
@@ -31,13 +31,14 @@ var get_dockerhub_readme = function (repo, callback) {
 var update_dockerhub_readme = function(user, pass, repo, full_desc, callback) {
 	const dockerHubAPI = require('docker-hub-api');
 
+	
 	var repo_parts = repo.split('/');
 
 	dockerHubAPI.login(user, pass).then(function(info) {
-		const descriptions = {
+		var descriptions = {
 		    full: full_desc
 		};
-
+		
 		dockerHubAPI.setRepositoryDescription(repo_parts[0], repo_parts[1], descriptions);
 
 		callback();
@@ -45,8 +46,8 @@ var update_dockerhub_readme = function(user, pass, repo, full_desc, callback) {
 };
 
 function run() {
-	var dockerhub_username = process.env.DOCKERHUB_USERNAME;
-	var dockerhub_password = process.env.DOCKERHUB_PASSWORD;
+	var dockerhub_username = process.env.DOCKERHUB_USERNAME
+	var dockerhub_password = process.env.DOCKERHUB_PASSWORD
 
 	var github_repo = process.env.GIT_REPOSITORY;
 	var dockerhub_repo = process.env.DOCKER_REPOSITORY;
@@ -61,17 +62,27 @@ function run() {
 		console.log('Getting dockerhub full description for ' + dockerhub_repo);
 		get_dockerhub_readme(dockerhub_repo, function(dockerhub_readme) {
 			
+			var skip_replace =  /^true$/i.test(process.env.SKIP_REPLACE);
+			if (skip_replace == undefined) {
+				skip_replace = false;
+			}
+
+			if (skip_replace == false) {
+				// replace <,> with nothing
+				github_readme = github_readme.replace(/\</g, "").replace(/\>/g, "");
+			}
+
 			// If they dont match, update it, else, just notify console it's doing nothing.
 			if (github_readme != dockerhub_readme) {
-				console.log('Github readme and dockerhub full description do not match, updating...');
+					console.log('Github readme and dockerhub full description do not match, updating...')
 				update_dockerhub_readme(dockerhub_username, dockerhub_password, dockerhub_repo, github_readme, function() {
 					console.log('Dockerhub updated.');					
 				});
 			} else {
-				console.log('Github readme and dockerhub full description match.');
-			}
+				console.log('Github readme and dockerhub full description match.')
+			};
 		});
 	});
-}
+};
 
 run();

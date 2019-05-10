@@ -69,7 +69,7 @@ function run() {
 
 			if (skip_replace == false) {
 				// replace <,> with nothing
-				github_readme = github_readme.replace(/<(.+?)>/g, "$1").replace(/<(.+?)>/g, "$2");
+				github_readme = github_readme.replace(/<(.+?)>/g, "$1");
 			}
 
 			// If they dont match, update it, else, just notify console it's doing nothing.

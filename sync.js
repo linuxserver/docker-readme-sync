@@ -46,6 +46,8 @@ var update_dockerhub_readme = function(user, pass, repo, full_desc, callback) {
 };
 
 function run() {
+	const fs = require('fs')
+
 	var dockerhub_username = process.env.DOCKERHUB_USERNAME
 	var dockerhub_password = process.env.DOCKERHUB_PASSWORD
 
@@ -62,6 +64,24 @@ function run() {
 		console.log('Getting dockerhub full description for ' + dockerhub_repo);
 		get_dockerhub_readme(dockerhub_repo, function(dockerhub_readme) {
 			
+			// determine if /mnt/README.lite exists
+			var readme_lite_file = '/mnt/README.lite'
+			var readme_lite_exists = false
+			try {
+				if (fs.existsSync(readme_lite_file)) {
+				  readme_lite_exists = true
+				}
+			} catch(err) {
+				console.log(err)
+			}
+			console.log(`File ${readme_lite_file} exists?: ${readme_lite_exists}.`)
+
+			// if README.lite exists and github readme is too large, then use README.lite contents
+			if (readme_lite_exists == true && github_readme.length > 25000) {
+				console.log(`Github readme length is larger than 25000, README.lite found, using README.lite`)
+				github_readme = fs.readFileSync(readme_lite_file).toString()
+			}
+
 			var skip_replace =  /^true$/i.test(process.env.SKIP_REPLACE);
 			if (skip_replace == undefined) {
 				skip_replace = false;
@@ -70,6 +90,13 @@ function run() {
 			if (skip_replace == false) {
 				// replace <,> with nothing
 				github_readme = github_readme.replace(/<(.+?)>/g, "$1");
+			}
+
+			console.log(`Github readme length: ${github_readme.length}.`)
+			console.log(`Dockerhub readme length: ${dockerhub_readme.length}.`)
+
+			if (readme_lite_exists == false && github_readme.length > 25000) {
+				throw new Error(`Github readme is longer than 25,000 characters (length ${github_readme.length}).`)
 			}
 
 			// If they dont match, update it, else, just notify console it's doing nothing.

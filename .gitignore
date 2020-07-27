@@ -49,3 +49,4 @@ app/config/settings.yml
 tmp/
 .idea/
 app/tmp
+node_modules

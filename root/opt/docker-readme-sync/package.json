@@ -1,10 +1,11 @@
 {
   "name": "nodejs_github_dockerhub_readme_sync",
-  "version": "0.0.1",
+  "version": "1.0.0",
+  "license": "GPL-3.0",
   "description": "Node.js utility to copy a github repo README.md to full description of a dockerhub repo.",
   "main": "sync.js",
   "dependencies": {
-    "docker-hub-api": "^0.5.1"
+    "docker-hub-api": "^0.8.0"
   },
   "devDependencies": {},
   "scripts": {

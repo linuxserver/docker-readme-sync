@@ -1,4 +1,3 @@
-
 var https = require('https');
 
 
@@ -101,7 +100,7 @@ function run() {
 
 			// If they dont match, update it, else, just notify console it's doing nothing.
 			if (github_readme != dockerhub_readme) {
-					console.log('Github readme and dockerhub full description do not match, updating...')
+				console.log('Github readme and dockerhub full description do not match, updating...')
 				update_dockerhub_readme(dockerhub_username, dockerhub_password, dockerhub_repo, github_readme, function() {
 					console.log('Dockerhub updated.');					
 				});

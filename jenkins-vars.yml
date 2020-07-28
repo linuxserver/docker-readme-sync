@@ -1,0 +1,20 @@
+---
+
+# jenkins variables
+project_name: docker-readme-sync
+external_type: os
+release_type: stable
+release_tag: latest
+ls_branch: master
+repo_vars:
+  - BUILD_VERSION_ARG = 'OS'
+  - LS_USER = 'linuxserver'
+  - LS_REPO = 'docker-readme-sync'
+  - CONTAINER_NAME = 'readme-sync'
+  - DOCKERHUB_IMAGE = 'lsiodev/readme-sync'
+  - DEV_DOCKERHUB_IMAGE = 'lsiodev/dev-readme-sync'
+  - PR_DOCKERHUB_IMAGE = 'lspipepr/readme-sync'
+  - DIST_IMAGE = 'alpine'
+  - MULTIARCH='true'
+  - CI='false'
+  - CI_WEB='false'

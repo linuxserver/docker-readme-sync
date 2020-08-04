@@ -23,7 +23,12 @@ var get_dockerhub_readme = function (repo, callback) {
 	var repo_parts = repo.split('/');
 
 	var repo = dockerHubAPI.repository(repo_parts[0], repo_parts[1]).then(function(info) {
-		callback(info['full_description']);
+		var desc = info['full_description']
+		if (desc == null) {
+			desc = ''
+		}
+
+		callback(desc);
 	});
 };
 

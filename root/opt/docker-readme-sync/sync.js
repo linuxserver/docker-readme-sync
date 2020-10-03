@@ -4,7 +4,7 @@ var https = require('https');
 var get_github_readme = function(repo, branch, callback) {
 	var repo_parts = repo.split('/');
 
-	var readme;
+	var readme = "";
 	var url = 'https://raw.githubusercontent.com/' + repo_parts[0] + '/' + repo_parts[1] + '/' + branch + '/README.md'
 	var request = https.get(url, function(response) {
 	    response.on('data', function(chunk) {
@@ -84,16 +84,6 @@ function run() {
 			if (readme_lite_exists == true && github_readme.length > 25000) {
 				console.log(`Github readme length is larger than 25000, README.lite found, using README.lite`)
 				github_readme = fs.readFileSync(readme_lite_file).toString()
-			}
-
-			var skip_replace =  /^true$/i.test(process.env.SKIP_REPLACE);
-			if (skip_replace == undefined) {
-				skip_replace = false;
-			}
-
-			if (skip_replace == false) {
-				// replace <,> with nothing
-				github_readme = github_readme.replace(/<(.+?)>/g, "$1");
 			}
 
 			console.log(`Github readme length: ${github_readme.length}.`)

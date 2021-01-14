@@ -68,14 +68,15 @@ function run() {
 		console.log('Getting dockerhub full description for ' + dockerhub_repo);
 		get_dockerhub_readme(dockerhub_repo, function(dockerhub_readme) {
 			
-			// determine if /mnt/README.lite exists
-			var readme_lite_file = '/mnt/README.lite'
+			// determine if README.lite exists
+			var readme_lite_file = 'README.lite'
 			var readme_lite_exists = false
 			try {
-				if (fs.existsSync(readme_lite_file)) {
+				if (fs.existsSync('/mnt/README.lite')) {
+				  readme_lite_file = '/mnt/README.lite';
 				  readme_lite_exists = true
-				} else if (fs.existsSync('/mnt/external/README.lite')) {
-					readme_lite_file = '/mnt/external/README.lite';
+				} else if (fs.existsSync('/mnt/.jenkins-external/README.lite')) {
+					readme_lite_file = '/mnt/.jenkins-external/README.lite';
 					readme_lite_exists = true
 				  }
 			} catch(err) {

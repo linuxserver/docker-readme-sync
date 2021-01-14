@@ -74,7 +74,10 @@ function run() {
 			try {
 				if (fs.existsSync(readme_lite_file)) {
 				  readme_lite_exists = true
-				}
+				} else if (fs.existsSync('/mnt/external/README.lite')) {
+					readme_lite_file = '/mnt/external/README.lite';
+					readme_lite_exists = true
+				  }
 			} catch(err) {
 				console.log(err)
 			}

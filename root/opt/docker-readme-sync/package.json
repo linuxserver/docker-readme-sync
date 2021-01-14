@@ -13,11 +13,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/linuxserver/docker-nodejs-readme-sync.git"
+    "url": "git+ssh://git@github.com/linuxserver/docker-readme-sync.git"
   },
   "author": "Paul Hendryx <phendryx@gmail.com>",
   "bugs": {
-    "url": "https://github.com/linuxserver/docker-nodejs-readme-sync/issues"
+    "url": "https://github.com/linuxserver/docker-readme-sync/issues"
   },
-  "homepage": "https://github.com/linuxserver/docker-nodejs-readme-sync#readme"
+  "homepage": "https://github.com/linuxserver/docker-readme-sync"
 }

@@ -1,4 +1,4 @@
-FROM ghcr.io/linuxserver/baseimage-alpine:arm32v7-3.12
+FROM ghcr.io/linuxserver/baseimage-alpine:arm32v7-3.16
 
 # set version label
 ARG BUILD_DATE
@@ -12,7 +12,7 @@ COPY ./root /
 RUN \
  echo "**** install build packages ****" && \
  apk add --no-cache --virtual=build-dependencies \
-	nodejs-npm && \
+	npm && \
  echo "**** install runtime packages ****" && \
  apk add --no-cache \
 	nodejs && \

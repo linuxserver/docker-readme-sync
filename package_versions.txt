@@ -69,8 +69,8 @@ ncurses-libs                         6.3_p20220521-r1       apk
 ncurses-terminfo-base                6.3_p20220521-r1       apk     
 netcat-openbsd                       1.130-r3               apk     
 nghttp2-libs                         1.47.0-r0              apk     
-node                                 16.20.0                binary  
-nodejs                               16.20.0-r0             apk     
+node                                 16.20.1                binary  
+nodejs                               16.20.1-r0             apk     
 nodejs_github_dockerhub_readme_sync  1.0.0                  npm     
 oauth-sign                           0.9.0                  npm     
 oniguruma                            6.9.8-r0               apk     

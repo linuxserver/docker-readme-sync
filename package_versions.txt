@@ -67,7 +67,7 @@ musl-utils                           1.2.3-r3               apk
 ncurses-libs                         6.3_p20220521-r1       apk   
 ncurses-terminfo-base                6.3_p20220521-r1       apk   
 netcat-openbsd                       1.130-r3               apk   
-nghttp2-libs                         1.47.0-r1              apk   
+nghttp2-libs                         1.47.0-r2              apk   
 nodejs                               16.20.2-r0             apk   
 nodejs_github_dockerhub_readme_sync  1.0.0                  npm   
 oauth-sign                           0.9.0                  npm   

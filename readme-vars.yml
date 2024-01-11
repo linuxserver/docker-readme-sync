@@ -2,7 +2,6 @@
 
 # project information
 project_name: readme-sync
-project_deprecation_status: true
 full_custom_readme: |
   {% raw -%}
   [linuxserverurl]: https://linuxserver.io

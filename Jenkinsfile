@@ -357,6 +357,7 @@ pipeline {
                 fi
                 if ! yq -e '.plugins.[].redirects.redirect_maps.[] | select(. == "deprecated/" + env(CONTAINER_NAME) + ".md")' mkdocs.yml  >/dev/null 2>&1; then
                   yq -i '.plugins.[].redirects.redirect_maps |= . + {env(CONTAINER_NAME) + ".md" : "deprecated/" + env(CONTAINER_NAME) + ".md"}' mkdocs.yml
+                  git add mkdocs.yml
                 fi
                 git commit -m 'Bot Moving Deprecated Documentation' || :
                 git pull https://LinuxServer-CI:${GITHUB_TOKEN}@github.com/linuxserver/docker-documentation.git ${GH_DOCS_DEFAULT_BRANCH} --rebase
